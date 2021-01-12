@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    app:cnb_unselectedColor="#ffff"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_lanka"
+        android:title="Sri Lanka"
+        app:cnb_backgroundColor="#0d47a1"
+        app:cnb_iconColor="#ffff"
+        app:cnb_textColor="#ffff"/>
+    <item
+        android:id="@+id/activity"
+        android:icon="@drawable/ic_globe"
+        android:title="Global"
+        app:cnb_backgroundColor="#0d47a1"
+        app:cnb_iconColor="#ffff"
+        app:cnb_textColor="#ffff"/>
+    <item
+        android:id="@+id/favorites"
+        android:icon="@drawable/ic_info"
+        android:title="Info"
+        app:cnb_backgroundColor="#0d47a1"
+        app:cnb_iconColor="#ffff"
+        app:cnb_textColor="#ffff"/>
+</menu>
