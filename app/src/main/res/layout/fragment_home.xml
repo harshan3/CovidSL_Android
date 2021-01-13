@@ -94,7 +94,6 @@
                     android:layout_width="150dp"
                     android:textAlignment="center"
                     android:layout_height="wrap_content"
-                    android:text="45,412"
                     android:textStyle="bold"
                     android:textSize="45dp"
                     android:textColor="@color/blue"
@@ -132,10 +131,10 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/txt_total_death"
                     android:textAlignment="center"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="996"
                     android:textStyle="bold"
                     android:textSize="45dp"
                     android:textColor="@color/red"
@@ -174,10 +173,11 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/txt_recovered"
                     android:textAlignment="center"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="996"
+
                     android:textStyle="bold"
                     android:textSize="45dp"
                     android:textColor="@color/green"
@@ -215,10 +215,11 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/txt_suspects"
                     android:textAlignment="center"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="1,296"
+
                     android:textStyle="bold"
                     android:textSize="45dp"
                     android:textColor="@color/yellow"
@@ -259,13 +260,14 @@
                     android:textAlignment="center"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="3"
+                    android:id="@+id/txt_new_deaths"
                     android:textStyle="bold"
                     android:textColor="@color/red"
                     android:textSize="45dp"
                     />
 
                 <TextView
+
                     android:textAlignment="center"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
@@ -297,10 +299,11 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/txt_new_cases"
                     android:textAlignment="center"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="567"
+
                     android:textStyle="bold"
                     android:textSize="45dp"
                     android:textColor="@color/blue"

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,10 +29,9 @@ public class MainActivity extends AppCompatActivity {
     ChipNavigationBar bottomNav;
     FragmentManager fragmentManager;
 
-    TextView mTextViewResult;
-    private RequestQueue mRequestQueue;
-    private StringRequest mStringRequest;
-    private String url = "http://www.mocky.io/v2/597c41390f0000d002f4dbd1";
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,21 +40,21 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNav = findViewById(R.id.bottom_nav);
 
-        Button buttonParse = findViewById(R.id.refresh);
 
-        if(savedInstanceState==null){
-            bottomNav.setItemSelected(R.id.home,true);
+
+        if (savedInstanceState == null) {
+            bottomNav.setItemSelected(R.id.home, true);
             fragmentManager = getSupportFragmentManager();
             HomeFragment homeFragment = new HomeFragment();
             fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container,homeFragment)
+                    .replace(R.id.fragment_container, homeFragment)
                     .commit();
         }
         bottomNav.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int id) {
                 Fragment fragment = null;
-                switch (id){
+                switch (id) {
                     case R.id.home:
                         fragment = new HomeFragment();
                         break;
@@ -67,19 +67,18 @@ public class MainActivity extends AppCompatActivity {
 
 
                 }
-                if(fragment!= null){
+                if (fragment != null) {
                     fragmentManager = getSupportFragmentManager();
                     fragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container,fragment)
+                            .replace(R.id.fragment_container, fragment)
                             .commit();
-                }else {
-                    Log.e(TAG, "Error in creating fragment" );
+                } else {
+                    Log.e(TAG, "Error in creating fragment");
                 }
             }
         });
 
 
+
     }
-
-
 }
