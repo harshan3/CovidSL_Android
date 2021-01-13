@@ -1,5 +1,6 @@
 package com.example.covidsldash;
 
+import android.animation.ValueAnimator;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -100,8 +101,8 @@ public class HomeFragment extends Fragment {
         btnRequest = (Button) v.findViewById(R.id.refresh);
 
          tvdate = (TextView) v.findViewById(R.id.date);
-        tvnew_cases = (TextView) v.findViewById(R.id.txt_new_deaths);
-        tvnew_deaths = (TextView) v.findViewById(R.id.txt_new_cases);
+        tvnew_cases = (TextView) v.findViewById(R.id.txt_new_cases);
+        tvnew_deaths = (TextView) v.findViewById(R.id.txt_new_deaths);
         tvrecovered = (TextView) v.findViewById(R.id.txt_recovered);
         tvsuspects = (TextView) v.findViewById(R.id.txt_suspects);
         tvtotal_cases = (TextView) v.findViewById(R.id.txt_total);
@@ -133,29 +134,94 @@ public class HomeFragment extends Fragment {
                 JsonObject jsonObject = gson.fromJson(response, JsonObject.class);
 
                 String total_cases = jsonObject.getAsJsonObject("data").get("local_total_cases").getAsString();
-                String total_deaths = jsonObject.getAsJsonObject("data").get("local_recovered").getAsString();
-                String total_recovered = jsonObject.getAsJsonObject("data").get("local_new_cases").getAsString();
+                String total_deaths = jsonObject.getAsJsonObject("data").get("local_deaths").getAsString();
+                String total_recovered = jsonObject.getAsJsonObject("data").get("local_recovered").getAsString();
                 String total_suspects = jsonObject.getAsJsonObject("data").get("local_total_number_of_individuals_in_hospitals").getAsString();
                 String new_deaths = jsonObject.getAsJsonObject("data").get("local_new_deaths").getAsString();
                 String new_cases = jsonObject.getAsJsonObject("data").get("local_new_cases").getAsString();
                 String date = jsonObject.getAsJsonObject("data").get("update_date_time").getAsString();
 
-                int tc = Integer.parseInt(total_cases);
-
-
-
                 DecimalFormat decim = new DecimalFormat("#,###");
+
                 try {
-                    tvdate.setText("Last updatd on : " + date);
-                    tvnew_cases.setText(decim.format(Integer.parseInt(new_cases)));
-                    tvnew_deaths.setText(decim.format(Integer.parseInt(new_deaths)));
-                    tvrecovered.setText(decim.format(Integer.parseInt(total_recovered)));
-                    tvsuspects.setText(decim.format(Integer.parseInt(total_suspects)));
-                    tvtotal_cases.setText(decim.format(Integer.parseInt(total_cases)));
-                    tvtotal_deaths.setText(decim.format(Integer.parseInt(total_deaths)));
+
+                    //Total case animate
+                    ValueAnimator animator = new ValueAnimator();
+                    animator.setObjectValues(0, Integer.parseInt(total_cases));
+                    animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        public void onAnimationUpdate(ValueAnimator animation) {
+                            tvtotal_cases.setText(String.valueOf(animation.getAnimatedValue()));
+                        }
+                    });
+                    animator.setDuration(500);
+                    animator.start();
+
+                    //Recovered2
+                    ValueAnimator animator2 = new ValueAnimator();
+                    animator2.setObjectValues(0, Integer.parseInt(total_recovered));
+                    animator2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        public void onAnimationUpdate(ValueAnimator animation) {
+                            tvrecovered.setText(String.valueOf(animation.getAnimatedValue()));
+                        }
+                    });
+                    animator2.setDuration(500);
+                    animator2.start();
+
+                    //Deaths3
+                    ValueAnimator animator3 = new ValueAnimator();
+                    animator3.setObjectValues(0, Integer.parseInt(total_deaths));
+                    animator3.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        public void onAnimationUpdate(ValueAnimator animation) {
+                            tvtotal_deaths.setText(String.valueOf(animation.getAnimatedValue()));
+                        }
+                    });
+                    animator3.setDuration(500);
+                    animator3.start();
+
+                    //Suspect4
+                    ValueAnimator animator4 = new ValueAnimator();
+                    animator4.setObjectValues(0, Integer.parseInt(total_suspects));
+                    animator4.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        public void onAnimationUpdate(ValueAnimator animation) {
+                            tvsuspects.setText(String.valueOf(animation.getAnimatedValue()));
+                        }
+                    });
+                    animator4.setDuration(500);
+                    animator4.start();
+
+                    //newcase5
+                    ValueAnimator animator5 = new ValueAnimator();
+                    animator5.setObjectValues(0, Integer.parseInt(new_cases));
+                    animator5.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        public void onAnimationUpdate(ValueAnimator animation) {
+                            tvnew_cases.setText(String.valueOf(animation.getAnimatedValue()));
+                        }
+                    });
+                    animator5.setDuration(500);
+                    animator5.start();
+
+                    //NewDeaths6
+                    ValueAnimator animator6 = new ValueAnimator();
+                    animator6.setObjectValues(0, Integer.parseInt(new_deaths));
+                    animator6.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        public void onAnimationUpdate(ValueAnimator animation) {
+                            tvnew_deaths.setText(String.valueOf(animation.getAnimatedValue()));
+                        }
+                    });
+                    animator6.setDuration(500);
+                    animator6.start();
 
 
-                 //   tvtotal_cases.setText(decim.format(Integer.parseInt(total_cases)));
+
+
+
+//                    tvdate.setText("Last updatd on : " + date);
+//                    tvnew_cases.setText(decim.format(Integer.parseInt(new_cases)));
+//                    tvnew_deaths.setText(decim.format(Integer.parseInt(new_deaths)));
+//                    tvrecovered.setText(decim.format(Integer.parseInt(total_recovered)));
+//                    tvsuspects.setText(decim.format(Integer.parseInt(total_suspects)));
+//                    tvtotal_cases.setText(decim.format(Integer.parseInt(total_cases)));
+//                    tvtotal_deaths.setText(decim.format(Integer.parseInt(total_deaths)));
 
                 } catch (Exception e){
                     Toast.makeText(getContext(),"Response :" + e.toString(), Toast.LENGTH_LONG).show();//display the response on screen
@@ -178,5 +244,9 @@ public class HomeFragment extends Fragment {
         });
 
         mRequestQueue.add(mStringRequest);
+    }
+
+    private void Animated_Totalcases() {
+
     }
 }
