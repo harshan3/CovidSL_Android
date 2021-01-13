@@ -1,14 +1,324 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".HomeFragment"
+    android:orientation="vertical"
+    android:background="@drawable/bg"
+  >
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
+        android:paddingTop="20dp"
+        android:id="@+id/home_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="Covid-19 Sri Lanka"
+        android:paddingLeft="20dp"
+        android:textColor="#ffff"
+        android:textStyle="bold"
+        android:textSize="25dp">
+    </TextView>
+
+    <Button
+        android:id="@+id/refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:drawableLeft="@drawable/ic_baseline_refresh_24"
+        android:text="  Refresh"
+        android:textSize="15dp"
+        android:background="@color/pd"
+        android:paddingRight="20dp"
+        android:layout_alignBottom="@id/home_title"
+        android:layout_alignParentRight="true"
+        android:textColor="#ffff"
+       />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="#ffff"
+        android:paddingTop="10dp"
+    android:layout_centerInParent="true"
+        android:text="2012.12.23 06:56 pm"
+        android:textSize="15dp"
+      android:layout_below="@id/home_title">
+    </TextView>
+
+
+    <GridLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Home" />
+        android:layout_below="@+id/date"
+        android:rowCount="3"
+        android:columnCount="2">
 
-</FrameLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_gravity="fill"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            android:focusableInTouchMode="true"
+
+            >
+            <FrameLayout
+                android:background="@drawable/cardbg"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:gravity="center"
+                android:textAlignment="center">
+
+
+                <TextView
+                    android:id="@+id/txt_total"
+                    android:layout_width="150dp"
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content"
+                    android:text="45,412"
+                    android:textStyle="bold"
+                    android:textSize="45dp"
+                    android:textColor="@color/blue"
+                   />
+
+                <TextView
+                    android:textAlignment="center"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:padding="10dp"
+                    android:text="Total"
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/ic_total"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_gravity="fill"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:gravity="center">
+
+                <TextView
+                    android:textAlignment="center"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="996"
+                    android:textStyle="bold"
+                    android:textSize="45dp"
+                    android:textColor="@color/red"
+                    />
+
+                <TextView
+                    android:textAlignment="center"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:padding="10dp"
+                    android:text="Deaths"
+                    android:drawablePadding="10dp"
+
+                    android:drawableStart="@drawable/ic_death"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_gravity="fill"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:gravity="center">
+
+                <TextView
+                    android:textAlignment="center"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="996"
+                    android:textStyle="bold"
+                    android:textSize="45dp"
+                    android:textColor="@color/green"
+                    />
+
+                <TextView
+                    android:textAlignment="center"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:padding="10dp"
+                    android:text="Recovered"
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/ic_recovery"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_gravity="fill"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:gravity="center">
+
+                <TextView
+                    android:textAlignment="center"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="1,296"
+                    android:textStyle="bold"
+                    android:textSize="45dp"
+                    android:textColor="@color/yellow"
+                    />
+
+                <TextView
+                    android:textAlignment="center"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:padding="10dp"
+                    android:text="Suspects"
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/ic_suspect"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_gravity="fill"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:gravity="center">
+
+                <TextView
+                    android:textAlignment="center"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="3"
+                    android:textStyle="bold"
+                    android:textColor="@color/red"
+                    android:textSize="45dp"
+                    />
+
+                <TextView
+                    android:textAlignment="center"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:padding="10dp"
+                    android:text="New Deaths"
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/ic_newdeath"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="1"
+            android:layout_gravity="fill"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:gravity="center">
+
+                <TextView
+                    android:textAlignment="center"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="567"
+                    android:textStyle="bold"
+                    android:textSize="45dp"
+                    android:textColor="@color/blue"
+                    />
+
+                <TextView
+                    android:textAlignment="center"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:padding="10dp"
+                    android:text="New Cases"
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/ic_new"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </GridLayout>
+
+
+</RelativeLayout>
