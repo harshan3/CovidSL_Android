@@ -3,12 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InfoFragment">
+    tools:context=".InfoFragment"
+    android:orientation="vertical"
+    android:background="@drawable/bg_newupdated"
+    >
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Info" />
+        android:paddingTop="20dp"
+        android:id="@+id/home_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="COVID-19 SL"
+        android:paddingLeft="20dp"
+        android:textColor="#ffff"
+        android:textStyle="bold"
+        android:textSize="25dp"
+
+        >
+    </TextView>
 
 </FrameLayout>
