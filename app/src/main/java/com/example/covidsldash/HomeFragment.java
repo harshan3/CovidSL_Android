@@ -2,16 +2,16 @@ package com.example.covidsldash;
 
 import android.animation.ValueAnimator;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,11 +22,9 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.text.DecimalFormat;
+
+import at.markushi.ui.CircleButton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,8 +33,11 @@ import java.text.DecimalFormat;
  */
 public class HomeFragment extends Fragment {
     private static final String TAG = MainActivity.class.getName();
-    private Button btnRequest;
-
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+    private final String url = " https://hpb.health.gov.lk/api/get-current-statistical";
     TextView tvdate;
     TextView tvtotal_cases;
     TextView tvtotal_deaths;
@@ -44,16 +45,10 @@ public class HomeFragment extends Fragment {
     TextView tvsuspects;
     TextView tvnew_deaths;
     TextView tvnew_cases;
-
+    TextView tvactive;
+    private CircleButton btnRequest;
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
-    private String url = " https://hpb.health.gov.lk/api/get-current-statistical";
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -98,22 +93,30 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
-        btnRequest = (Button) v.findViewById(R.id.refresh);
+        btnRequest = v.findViewById(R.id.refresh);
 
-         tvdate = (TextView) v.findViewById(R.id.date);
-        tvnew_cases = (TextView) v.findViewById(R.id.txt_new_cases);
-        tvnew_deaths = (TextView) v.findViewById(R.id.txt_new_deaths);
-        tvrecovered = (TextView) v.findViewById(R.id.txt_recovered);
-        tvsuspects = (TextView) v.findViewById(R.id.txt_suspects);
-        tvtotal_cases = (TextView) v.findViewById(R.id.txt_total);
-        tvtotal_deaths = (TextView) v.findViewById(R.id.txt_total_death);
+        tvdate = v.findViewById(R.id.date);
+        tvnew_cases = v.findViewById(R.id.txt_new_cases);
+        tvnew_deaths = v.findViewById(R.id.txt_new_deaths);
+        tvrecovered = v.findViewById(R.id.txt_recovered);
+        tvsuspects = v.findViewById(R.id.txt_suspects);
+        tvtotal_cases = v.findViewById(R.id.txt_total);
+        tvtotal_deaths = v.findViewById(R.id.txt_total_death);
+        tvactive = v.findViewById(R.id.txt_active);
 
         btnRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //make your toast here
-               // Toast.makeText(getActivity(),"Text!",Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getActivity(),"Text!",Toast.LENGTH_SHORT).show();
+                Animation animation = new RotateAnimation(0.0f, 360.0f,
+                        Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+                        0.5f);
+                animation.setRepeatCount(-1);
+                animation.setDuration(200);
+                // btnRequest.setAnimation(animation);
                 sendAndRequestResponse();
+
             }
         });
         return v;
@@ -121,15 +124,17 @@ public class HomeFragment extends Fragment {
 
     private void sendAndRequestResponse() {
 
+
         //RequestQueue initialized
         mRequestQueue = Volley.newRequestQueue(getContext());
 
         //String Request initialized
         mStringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+
             @Override
             public void onResponse(String response) {
 
-            //    Toast.makeText(getContext(),"Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
+                //    Toast.makeText(getContext(),"Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
                 Gson gson = new Gson();
                 JsonObject jsonObject = gson.fromJson(response, JsonObject.class);
 
@@ -140,6 +145,7 @@ public class HomeFragment extends Fragment {
                 String new_deaths = jsonObject.getAsJsonObject("data").get("local_new_deaths").getAsString();
                 String new_cases = jsonObject.getAsJsonObject("data").get("local_new_cases").getAsString();
                 String date = jsonObject.getAsJsonObject("data").get("update_date_time").getAsString();
+                String activecase = jsonObject.getAsJsonObject("data").get("local_active_cases").getAsString();
 
                 DecimalFormat decim = new DecimalFormat("#,###");
 
@@ -195,6 +201,7 @@ public class HomeFragment extends Fragment {
                     animator5.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                         public void onAnimationUpdate(ValueAnimator animation) {
                             tvnew_cases.setText(String.valueOf(animation.getAnimatedValue()));
+                            //  Toast.makeText(getContext(),"Response :" + new_cases.toString(), Toast.LENGTH_LONG).show();//display the response on screen
                         }
                     });
                     animator5.setDuration(500);
@@ -212,10 +219,21 @@ public class HomeFragment extends Fragment {
                     animator6.start();
 
 
+                    //active7
+                    ValueAnimator animator7 = new ValueAnimator();
+                    animator7.setObjectValues(0, Integer.parseInt(activecase));
+                    animator7.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        public void onAnimationUpdate(ValueAnimator animation) {
+                            tvactive.setText(String.valueOf(animation.getAnimatedValue()));
+                        }
+                    });
+                    animator7.setDuration(500);
+                    animator7.start();
+
+//date7
+                    tvdate.setText("Last updatd on : " + date);
 
 
-
-//                    tvdate.setText("Last updatd on : " + date);
 //                    tvnew_cases.setText(decim.format(Integer.parseInt(new_cases)));
 //                    tvnew_deaths.setText(decim.format(Integer.parseInt(new_deaths)));
 //                    tvrecovered.setText(decim.format(Integer.parseInt(total_recovered)));
@@ -223,30 +241,25 @@ public class HomeFragment extends Fragment {
 //                    tvtotal_cases.setText(decim.format(Integer.parseInt(total_cases)));
 //                    tvtotal_deaths.setText(decim.format(Integer.parseInt(total_deaths)));
 
-                } catch (Exception e){
-                    Toast.makeText(getContext(),"Response :" + e.toString(), Toast.LENGTH_LONG).show();//display the response on screen
+                } catch (Exception e) {
+                    Toast.makeText(getContext(), "Response :" + e.toString(), Toast.LENGTH_LONG).show();//display the response on screen
 //
                 }
 
 
-
-
-
-           // Toast.makeText(getContext(),"Response :" + pageName.toString(), Toast.LENGTH_LONG).show();//display the response on screen
+                // Toast.makeText(getContext(),"Response :" + pageName.toString(), Toast.LENGTH_LONG).show();//display the response on screen
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Log.i(TAG,"Error :" + error.toString());
+                Log.i(TAG, "Error :" + error.toString());
             }
         });
 
         mRequestQueue.add(mStringRequest);
     }
 
-    private void Animated_Totalcases() {
 
-    }
 }
